@@ -1,0 +1,8 @@
+/writable/cache/*
+!/writable/cache/.gitkeep
+
+/writable/logs/*
+!/writable/logs/.gitkeep
+
+/writable/session/*
+!/writable/session/.gitkeep
