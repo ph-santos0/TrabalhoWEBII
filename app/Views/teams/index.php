@@ -1,0 +1,254 @@
+<?= $this->extend('layouts/public') ?>
+
+<?= $this->section('content') ?>
+
+<style>
+
+/* FUNDO estilo Pokédex */
+body{
+    background: linear-gradient(180deg, #e9f3ff 0%, #ffffff 100%);
+}
+
+/* TÍTULO PRINCIPAL */
+.page-title{
+    font-weight:900;
+    color:#1d3557;
+}
+
+/* BOTÃO PRINCIPAL */
+.btn-pokemon{
+    background: linear-gradient(90deg, #ff3b3b, #ff6b6b);
+    border:none;
+    color:white;
+    font-weight:bold;
+    box-shadow:0 4px 10px rgba(255,0,0,.2);
+}
+
+.btn-pokemon:hover{
+    transform: translateY(-2px);
+    background: linear-gradient(90deg, #e22b2b, #ff4a4a);
+}
+
+/* CARD DO TIME (estilo jogo) */
+.team-card{
+    border:4px solid #3b82f6;
+    border-radius:18px;
+    overflow:hidden;
+    background:white;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+/* HEADER estilo “HUD de jogo” */
+.team-header{
+    background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+    color:white;
+    padding:12px 16px;
+    font-weight:bold;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* BOTÕES pequenos estilo game */
+.icon-btn{
+    border:none;
+    background:rgba(255,255,255,.15);
+    color:white;
+    padding:6px 10px;
+    border-radius:8px;
+    transition:.2s;
+}
+
+.icon-btn:hover{
+    background:rgba(255,255,255,.3);
+    transform:scale(1.05);
+}
+
+/* SLOT estilo Pokémon party */
+.slot{
+    background: linear-gradient(180deg, #ffffff, #f1f6ff);
+    border:2px dashed #94a3b8;
+    border-radius:12px;
+    min-height:120px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    transition:.2s;
+}
+
+.slot:hover{
+    border-color:#3b82f6;
+    transform:translateY(-3px);
+    background:#eef6ff;
+}
+
+/* ícone  Nintendo */
+.slot i{
+    font-size:28px;
+    opacity:.5;
+}
+
+/* CORES por time estilo Pokémon */
+.team-red .team-header{
+    background: linear-gradient(90deg, #d14747, #921010);
+}
+
+.team-blue .team-header{
+    background: linear-gradient(90deg, #5d80e2, #194285);
+}
+
+.team-green .team-header{
+    background: linear-gradient(90deg, #3bcf6f, #12622f);
+}
+body{
+    background-color:#eaf4ff;
+    position:relative;
+}
+/* Fundo */
+body::before{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-image:url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png");
+    background-size:90px;
+    opacity:0.4;
+    pointer-events:none;
+    z-index:-1;
+}
+</style>
+
+<div class="container my-5">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="page-title">
+            <i class="fa-solid fa-gamepad text-danger me-2"></i>
+            Pokémon Team Builder - Unova
+        </h2>
+
+        <button class="btn btn-pokemon" data-bs-toggle="modal" data-bs-target="#searchPokemonModal">
+            <i class="fa-solid fa-magnifying-glass me-2"></i>
+            Buscar Pokémon
+        </button>
+    </div>
+
+   <div class="team-card team-red mb-4">
+
+    <div class="team-header d-flex justify-content-between align-items-center">
+
+        <div class="d-flex align-items-center gap-2">
+           <!-- macaco fogo -->
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/513.gif"
+                 style="width:40px; height:40px;">
+
+            <span>🔥 Red Team</span>
+
+        </div>
+
+        <!-- BOTÕES -->
+        <div>
+            <button class="icon-btn"><i class="fa-solid fa-pen"></i></button>
+            <button class="icon-btn ms-1"><i class="fa-solid fa-file-pdf"></i></button>
+        </div>
+
+    </div>
+
+    <!-- SLOTS -->
+    <div class="p-3 bg-light">
+        <div class="row g-2 justify-content-center">
+
+            <?php for($i=1; $i<=6; $i++): ?>
+            <div class="col-4 col-md-2">
+                <div class="slot">
+                    <i class="fa-solid fa-plus"></i>
+                    <span class="small text-muted">Slot <?= $i ?></span>
+                </div>
+            </div>
+            <?php endfor; ?>
+
+        </div>
+    </div>
+
+</div>
+
+    <!-- TEAM BLUE -->
+    <div class="team-card team-blue mb-4">
+
+    <div class="team-header d-flex justify-content-between align-items-center">
+
+        <div class="d-flex align-items-center gap-2">
+                    <!-- macaco agua -->
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/515.gif"
+                 style="width:40px; height:40px;">
+
+            <span>💧 Blue Team</span>
+
+        </div>
+
+        <div>
+            <button class="icon-btn"><i class="fa-solid fa-pen"></i></button>
+            <button class="icon-btn ms-1"><i class="fa-solid fa-file-pdf"></i></button>
+        </div>
+
+    </div>
+
+    <div class="p-3 bg-light">
+        <div class="row g-2 justify-content-center">
+
+            <?php for($i=1; $i<=6; $i++): ?>
+            <div class="col-4 col-md-2">
+                <div class="slot">
+                    <i class="fa-solid fa-plus"></i>
+                    <span class="small text-muted">Slot <?= $i ?></span>
+                </div>
+            </div>
+            <?php endfor; ?>
+
+        </div>
+    </div>
+
+</div>
+
+    <!-- TEAM GREEN -->
+    <div class="team-card team-green mb-4">
+
+    <div class="team-header d-flex justify-content-between align-items-center">
+
+        <div class="d-flex align-items-center gap-2">
+                    <!-- macaco planta -->
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/511.gif"
+                 style="width:40px; height:40px;">
+
+            <span>🌿 Green Team</span>
+
+        </div>
+
+        <div>
+            <button class="icon-btn"><i class="fa-solid fa-pen"></i></button>
+            <button class="icon-btn ms-1"><i class="fa-solid fa-file-pdf"></i></button>
+        </div>
+
+    </div>
+
+    <div class="p-3 bg-light">
+        <div class="row g-2 justify-content-center">
+
+            <?php for($i=1; $i<=6; $i++): ?>
+            <div class="col-4 col-md-2">
+                <div class="slot">
+                    <i class="fa-solid fa-plus"></i>
+                    <span class="small text-muted">Slot <?= $i ?></span>
+                </div>
+            </div>
+            <?php endfor; ?>
+
+        </div>
+    </div>
+
+</div>
+
+<?= $this->endSection() ?>
