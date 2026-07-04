@@ -4,30 +4,21 @@ namespace App\Controllers;
 
 class Home extends BaseController
 {
-    //função para aderir título às páginas
-    private $dadosCabecalho;
-
-    public function initController($request, $response, $logger)
-    {
-        
-        parent::initController($request, $response, $logger);
-
-        $this ->dadosCabecalho = [
-            "titulo" => 'TeamBuilder'
-        ];
-        
-    }
-
     public function index(): string
     {
-        return view('welcome_message');
+        // O CodeIgniter vai buscar o arquivo app/Views/public/home.php
+        // Esse arquivo, por sua vez, carrega o layout em app/Views/layouts/public.php
+        return view('public/home', ['title' => 'Início | Unova Team Builder']);
+    }
+    public function login(): string
+    {
+        return view('public/login', ['title' => 'Login | Unova Team Builder']);
     }
 
-    //view mesclada referente à página home
-    public function home(): string
+    // A área restrita (Teams)
+    public function teams(): string
     {
-        return view('header', $this->dadosCabecalho).
-               view('home_content').
-               view('footer');
+        // Aqui, futuramente, passaremos os dados dos times
+        return view('teams/index', ['title' => 'Meus Times | Unova Team Builder']);
     }
 }
