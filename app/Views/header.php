@@ -12,7 +12,7 @@
             <ul>
                 <li>
                     <a href="<?=base_url('/')?>">
-                         <img class="img-titulo" src="<?= base_url('img/titulo-sf.png') ?>" alt="">
+                         <img class="img-titulo" src="<?= base_url('img/titulo-sf.png') ?>" alt="Imagem Título">
                     </a>
                 </li>
                 
