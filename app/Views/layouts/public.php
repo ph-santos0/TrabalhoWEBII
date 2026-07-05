@@ -132,11 +132,11 @@
     <div class="container text-center">
 
         <p class="mb-1">
-            &copy; <?= date('Y') ?> Unova Team Builder - IFMG
+            &copy; <?= date('Y') ?> Unova Team Builder - IFMG - SJE
         </p>
 
         <small>
-            Projeto educacional inspirado em Pokémon Black & White • Nintendo / Game Freak
+            Projeto educacional ipara montar times de Pokémon da região de Unova.
         </small>
 
     </div>
