@@ -276,10 +276,11 @@ para Pokémon Black & White.
 
 </p>
 
-<a href="<?= base_url('login') ?>"
-class="btn btn-start shadow">
+<a href="<?= base_url('login') ?>" class="btn btn-start shadow">
+    Começar Agora
+</a>
 
-Começar Agora
+
 
 </a>
 
