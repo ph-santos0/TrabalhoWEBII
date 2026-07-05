@@ -52,6 +52,13 @@
 
                 <div class="card-body p-4 p-md-5 bg-white">
                     
+
+ <?php if (session()->getFlashdata('error')): ?>
+    <div class="alert alert-danger border-0 shadow-sm rounded-3 text-center">
+        <?= session()->getFlashdata('error') ?>
+    </div>
+<?php endif; ?>
+                    
                     <form action="<?= base_url('register/process') ?>" method="POST">
                         
                         <div class="mb-3">
