@@ -17,31 +17,47 @@ class TeamController extends BaseController
         $this->teamModel = new TeamModel();
     }
 
-    public function index()
-    {
-        // Instancia o serviço de busca na PokéAPI
-        $pokemonService = new PokemonService();
-
-        // Busca a lista de Pokémon (da API ou Cache)
-        $pokemons = $pokemonService->getGen5Pokemon();
-        
-
-        // Prepara os dados
-        $data = [
-            'titulo'   => 'Dashboard - Team Builder',
-            'pokemons' => $pokemons
-        ];
-
-        
-
-        // Carrega a view da dashboard
-        return view('teams/index', $data);
-
-        
+   public function index()
+{
+    if (!session()->get('logado')) {
+        return redirect()->to('/login');
     }
 
-   
+    $pokemonService = new PokemonService();
 
+    $pokemons = $pokemonService->getGen5Pokemon();
+
+    $userId = session()->get('id_usuario');
+
+    $times = $this->teamModel->getTeamsByUser($userId);
+
+    return view('teams/index', [
+        'titulo'   => 'Dashboard - Team Builder',
+        'pokemons' => $pokemons,
+        'times'    => $times
+    ]);
+}
+    
+    
+    public function edit($id)
+{
+    if (!session()->get('logado')) {
+        return redirect()->to('/login');
+    }
+
+    $pokemonService = new PokemonService();
+
+    $team = $this->teamModel->getTeam($id);
+
+    if (!$team) {
+        throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+    }
+
+    return view('teams/edit', [
+        'team'      => $team,
+        'pokemons'  => $pokemonService->getGen5Pokemon()
+    ]);
+}
     public function salvar()
     {
         if (!session()->get('logado')) {
@@ -67,25 +83,21 @@ class TeamController extends BaseController
     }
 
     public function atualizar($id)
-    {
-        if (!session()->get('logado')) {
-            return redirect()->to('/login');
-        }
+{
+    $dados = [
+        'nome'     => $this->request->getPost('nome'),
+        'pokemon1' => $this->request->getPost('pokemon1'),
+        'pokemon2' => $this->request->getPost('pokemon2'),
+        'pokemon3' => $this->request->getPost('pokemon3'),
+        'pokemon4' => $this->request->getPost('pokemon4'),
+        'pokemon5' => $this->request->getPost('pokemon5'),
+        'pokemon6' => $this->request->getPost('pokemon6'),
+    ];
 
-        $dados = [
-            'nome'     => $this->request->getPost('nome'),
-            'pokemon1' => $this->request->getPost('pokemon1'),
-            'pokemon2' => $this->request->getPost('pokemon2'),
-            'pokemon3' => $this->request->getPost('pokemon3'),
-            'pokemon4' => $this->request->getPost('pokemon4'),
-            'pokemon5' => $this->request->getPost('pokemon5'),
-            'pokemon6' => $this->request->getPost('pokemon6'),
-        ];
+    $this->teamModel->atualizarEquipe($id, $dados);
 
-        $this->teamModel->atualizarEquipe($id, $dados);
-
-        return redirect()->back()->with('success', 'Equipe atualizada.');
-    }
+    return redirect()->back()->with('success', 'Equipe atualizada.');
+}
 
     public function excluir($id)
     {
@@ -109,19 +121,9 @@ class TeamController extends BaseController
         return $this->response->setJSON($time);
     }
 
-    public function meuTime()
-    {
-        $usuario = session()->get('usuario');
-
-        $times = $this->teamModel
-                    ->getTeamsByUser($usuario['id']);
-
-        return view('team/meu_time', [
-            'times' => $times
-        ]);
-
-        
-
+  public function meuTime()
+{
+    return $this->index();
 }
     public function exportarPDF($id)
     {

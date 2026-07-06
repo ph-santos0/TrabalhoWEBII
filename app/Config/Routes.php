@@ -53,5 +53,13 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
     'TeamController::exportarPDF/$1',
     ['filter' => 'auth']
 );
+/*
+    |--------------------------------------------------------------------------
+    | Rotas de Edição de Equipes
+    |--------------------------------------------------------------------------
+    */
+$routes->get('teams/edit/(:num)', 'TeamController::edit/$1');
+$routes->post('teams/update/(:num)', 'TeamController::update/$1');
+$routes->get('meu-time', 'TeamController::meuTime');
 
 });

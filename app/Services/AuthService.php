@@ -31,6 +31,7 @@ class AuthService
             $session->set([
                 'id_usuario' => $user['id'],
                 'nome'       => $user['nome'],
+                'usuario'    => $user,
                 'logado'     => true,
             ]);
 

@@ -144,7 +144,13 @@ body::before{
             Buscar Pokémon
         </button>
     </div>
-
+    <?php
+    $redTeam   = $times[0] ?? null;
+    $blueTeam  = $times[1] ?? null;
+    $greenTeam = $times[2] ?? null;
+    ?>
+   
+    
    <div class="team-card team-red mb-4">
 
     <div class="team-header d-flex justify-content-between align-items-center">
@@ -160,27 +166,56 @@ body::before{
 
         <!-- BOTÕES -->
         <div>
-            <button class="icon-btn"><i class="fa-solid fa-pen"></i></button>
-            <button class="icon-btn ms-1"><i class="fa-solid fa-file-pdf"></i></button>
+           <a href="<?= site_url('teams/edit/'.$redTeam['id']) ?>" class="icon-btn text-decoration-none">
+    <i class="fa-solid fa-pen"></i>
+</a>
+
+<button class="icon-btn ms-1">
+    <i class="fa-solid fa-file-pdf"></i>
+</button>
         </div>
 
     </div>
 
     <!-- SLOTS -->
     <div class="p-3 bg-light">
-        <div class="row g-2 justify-content-center">
+    <div class="row g-2 justify-content-center">
 
-            <?php for($i=1; $i<=6; $i++): ?>
+        <?php for($i=1; $i<=6; $i++): ?>
+
+            <?php $pokemon = $redTeam['pokemon'.$i]; ?>
+
             <div class="col-4 col-md-2">
-                <div class="slot">
-                    <i class="fa-solid fa-plus"></i>
-                    <span class="small text-muted">Slot <?= $i ?></span>
-                </div>
-            </div>
-            <?php endfor; ?>
 
-        </div>
+                <div class="slot">
+
+                    <?php if(!empty($pokemon) && $pokemon != 0): ?>
+
+                        <img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/<?= $pokemon ?>.png"
+                            width="72">
+
+                        <div class="fw-bold mt-2">
+                            #<?= $pokemon ?>
+                        </div>
+
+                    <?php else: ?>
+
+                        <i class="fa-solid fa-plus"></i>
+                        <span class="small text-muted">
+                            Slot <?= $i ?>
+                        </span>
+
+                    <?php endif; ?>
+
+                </div>
+
+            </div>
+
+        <?php endfor; ?>
+
     </div>
+</div>
 
 </div>
 
@@ -199,28 +234,59 @@ body::before{
         </div>
 
         <div>
-            <button class="icon-btn"><i class="fa-solid fa-pen"></i></button>
-            <button class="icon-btn ms-1"><i class="fa-solid fa-file-pdf"></i></button>
+            <a href="<?= site_url('teams/edit/'.$blueTeam['id']) ?>" class="icon-btn text-decoration-none">
+    <i class="fa-solid fa-pen"></i>
+</a>
+
+<button class="icon-btn ms-1">
+    <i class="fa-solid fa-file-pdf"></i>
+</button>
         </div>
 
     </div>
 
-    <div class="p-3 bg-light">
-        <div class="row g-2 justify-content-center">
+   <div class="p-3 bg-light">
+    <div class="row g-2 justify-content-center">
 
-            <?php for($i=1; $i<=6; $i++): ?>
+        <?php for($i=1; $i<=6; $i++): ?>
+
+            <?php $pokemon = $blueTeam['pokemon'.$i]; ?>
+
             <div class="col-4 col-md-2">
-                <div class="slot">
-                    <i class="fa-solid fa-plus"></i>
-                    <span class="small text-muted">Slot <?= $i ?></span>
-                </div>
-            </div>
-            <?php endfor; ?>
 
-        </div>
+                <div class="slot">
+
+                    <?php if(!empty($pokemon) && $pokemon != 0): ?>
+
+                        <img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/<?= $pokemon ?>.png"
+                            width="72">
+
+                        <div class="fw-bold mt-2">
+                            #<?= $pokemon ?>
+                        </div>
+
+                    <?php else: ?>
+
+                        <i class="fa-solid fa-plus"></i>
+                        <span class="small text-muted">
+                            Slot <?= $i ?>
+                        </span>
+
+                    <?php endif; ?>
+
+                </div>
+
+            </div>
+
+        <?php endfor; ?>
+
+    </div>
+</div>
+
     </div>
 
-</div>
+
 
     <!-- TEAM GREEN -->
     <div class="team-card team-green mb-4">
@@ -237,26 +303,56 @@ body::before{
         </div>
 
         <div>
-            <button class="icon-btn"><i class="fa-solid fa-pen"></i></button>
-            <button class="icon-btn ms-1"><i class="fa-solid fa-file-pdf"></i></button>
+            <a href="<?= site_url('teams/edit/'.$greenTeam['id']) ?>" class="icon-btn text-decoration-none">
+    <i class="fa-solid fa-pen"></i>
+</a>
+
+<button class="icon-btn ms-1">
+    <i class="fa-solid fa-file-pdf"></i>
+</button>
+
         </div>
 
     </div>
 
     <div class="p-3 bg-light">
-        <div class="row g-2 justify-content-center">
+    <div class="row g-2 justify-content-center">
 
-            <?php for($i=1; $i<=6; $i++): ?>
+        <?php for($i=1; $i<=6; $i++): ?>
+
+            <?php $pokemon = $greenTeam['pokemon'.$i]; ?>
+
             <div class="col-4 col-md-2">
-                <div class="slot">
-                    <i class="fa-solid fa-plus"></i>
-                    <span class="small text-muted">Slot <?= $i ?></span>
-                </div>
-            </div>
-            <?php endfor; ?>
 
-        </div>
+                <div class="slot">
+
+                    <?php if(!empty($pokemon) && $pokemon != 0): ?>
+
+                        <img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/<?= $pokemon ?>.png"
+                            width="72">
+
+                        <div class="fw-bold mt-2">
+                            #<?= $pokemon ?>
+                        </div>
+
+                    <?php else: ?>
+
+                        <i class="fa-solid fa-plus"></i>
+                        <span class="small text-muted">
+                            Slot <?= $i ?>
+                        </span>
+
+                    <?php endif; ?>
+
+                </div>
+
+            </div>
+
+        <?php endfor; ?>
+
     </div>
+</div>
 
 </div>
 

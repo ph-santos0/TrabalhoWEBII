@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Services\AuthService;
 use App\Models\UserModel;
+use App\Models\TeamModel;
 
 class UserController extends BaseController
 {
@@ -31,35 +32,63 @@ class UserController extends BaseController
     }
 
     public function register()
-    {
-        if ($this->request->getMethod() === 'POST') {
-            $userModel = new UserModel();
+{
+    if ($this->request->getMethod() === 'POST') {
 
-            $nome  = $this->request->getPost('nome');
-            $email = $this->request->getPost('email');
-            $senha = $this->request->getPost('senha');
-            $confirma = $this->request->getPost('confirma_senha'); // Ajuste conforme seu form
+        $userModel = new UserModel();
+        $teamModel = new TeamModel();
 
-            // Validação de senha
-            if ($senha !== $confirma) {
-                return redirect()->back()->withInput()->with('erro', 'As senhas não coincidem.');
-            }
+        $nome  = $this->request->getPost('nome');
+        $email = $this->request->getPost('email');
+        $senha = $this->request->getPost('senha');
+        $confirma = $this->request->getPost('confirma_senha');
 
-            $data = [
-                'nome'  => $nome,
-                'email' => $email,
-                'senha' => password_hash((string) $senha, PASSWORD_DEFAULT),
-            ];
-
-            if ($userModel->insert($data)) {
-                return redirect()->to('/login')->with('sucesso', 'Cadastro realizado com sucesso!');
-            }
-
-            return redirect()->back()->withInput()->with('erro', 'Erro ao realizar cadastro.');
+        if ($senha !== $confirma) {
+            return redirect()->back()
+                ->withInput()
+                ->with('erro', 'As senhas não coincidem.');
         }
 
-        return view('public/register', ['title' => 'Cadastro | Unova Team Builder']);
+        $data = [
+            'nome'  => $nome,
+            'email' => $email,
+            'senha' => password_hash((string)$senha, PASSWORD_DEFAULT),
+        ];
+
+        // Cria o usuário
+        $userId = $userModel->insert($data);
+
+        if ($userId) {
+
+            // Cria automaticamente os três times
+            $teamModel->insert([
+                'user_id' => $userId,
+                'nome'    => 'Red Team'
+            ]);
+
+            $teamModel->insert([
+                'user_id' => $userId,
+                'nome'    => 'Blue Team'
+            ]);
+
+            $teamModel->insert([
+                'user_id' => $userId,
+                'nome'    => 'Green Team'
+            ]);
+
+            return redirect()->to('/login')
+                ->with('sucesso', 'Cadastro realizado com sucesso!');
+        }
+
+        return redirect()->back()
+            ->withInput()
+            ->with('erro', 'Erro ao realizar cadastro.');
     }
+
+    return view('public/register', [
+        'title' => 'Cadastro | Unova Team Builder'
+    ]);
+}
 
     public function logout()
     {
