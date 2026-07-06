@@ -9,7 +9,7 @@
                     <h4 class="mb-0">Definir Nova Senha</h4>
                 </div>
                 <div class="card-body p-4">
-                    <form action="<?= base_url('reset-password/' . $token) ?>" method="post">
+                    <form action="<?= base_url('reset-senha/' . $token) ?>" method="post">
                         <?= csrf_field() ?>
 
                         <div class="mb-3">
