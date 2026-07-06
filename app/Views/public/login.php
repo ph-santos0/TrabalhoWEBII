@@ -4,9 +4,9 @@
 
 <div class="container d-flex align-items-center justify-content-center" style="min-height: 70vh;">
     <div class="card shadow-lg border-0" style="width: 100%; max-width: 400px;">
-        <div class="card-header bg-pokemon-dark text-white text-center py-3">
-            <h4 class="mb-0"><i class="fa-solid fa-right-to-bracket me-2"></i>Acesso ao Sistema</h4>
-        </div>
+        <div class="card-header bg-danger text-white text-center py-3">
+    <h4 class="mb-0"><i class="fa-solid fa-right-to-bracket me-2"></i>Fazer Login</h4>
+</div>
         <div class="card-body p-4">
             
             <form action="<?= base_url('login/authenticate') ?>" method="post">

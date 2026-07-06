@@ -136,7 +136,7 @@
         </p>
 
         <small>
-            Projeto educacional ipara montar times de Pokémon da região de Unova.
+            Projeto educacional para montar times de Pokémon da região de Unova.
         </small>
 
     </div>

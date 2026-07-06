@@ -175,7 +175,7 @@ body::before{
 
 </div>
 
-    <!-- TEAM BLUE -->
+    <!-- TIME AZUL -->
     <div class="team-card team-blue mb-4">
 
     <div class="team-header d-flex justify-content-between align-items-center">
