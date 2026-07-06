@@ -59,8 +59,8 @@
     </div>
 <?php endif; ?>
                     
-                    <form action="<?= base_url('register/process') ?>" method="POST">
-                        
+                    <form action="<?= base_url('register') ?>" method="POST">
+                        <?= csrf_field() ?>
                         <div class="mb-3">
                             <label for="nome" class="form-label text-muted fw-bold">Nome Completo</label>
                             <div class="input-group">

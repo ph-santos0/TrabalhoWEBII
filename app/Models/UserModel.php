@@ -7,20 +7,9 @@ use CodeIgniter\Model;
 class UserModel extends Model
 {
 
-    protected $table = 'users';
-
+    protected $table      = 'users';
     protected $primaryKey = 'id';
-
-    protected $allowedFields = [
-
-        'nome',
-
-        'email',
-
-        'senha'
-
-    ];
+    protected $allowedFields = ['nome', 'email', 'senha', 'reset_token', 'reset_expires_at'];
 
     protected $useTimestamps = true;
-
 }
