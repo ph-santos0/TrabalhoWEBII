@@ -107,4 +107,20 @@ class UserController extends BaseController
 
         return view('public/reset_password', ['token' => $token]);
     }
+
+
+
+
+
+
+    
+
+     public function perfil()
+{
+    if (!session()->get('logado')) {
+        return redirect()->to('/login');
+    }
+
+    return view('usuario/perfil');
+}
 }
