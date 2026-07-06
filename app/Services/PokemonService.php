@@ -11,6 +11,8 @@ class PokemonService
         // Inicializa o cliente HTTP nativo do CodeIgniter
         $this->client = \Config\Services::curlrequest([
             'baseURI' => 'https://pokeapi.co/api/v2/',
+            'verify' => false,
+            'http_errors' => false
         ]);
     }
 
@@ -31,6 +33,8 @@ class PokemonService
         try {
             // A 5ª Geração começa no #494. Portanto, pulamos 493 (offset) e pegamos 156 (limit)
             $response = $this->client->get('pokemon?limit=156&offset=493');
+
+            
             
             if ($response->getStatusCode() === 200) {
                 $data = json_decode($response->getBody(), true);
@@ -54,11 +58,13 @@ class PokemonService
 
                 return $pokemonList;
             }
-        } catch (\Exception $e) {
-            // Se a PokéAPI cair, salvamos o erro no log e retornamos vazio
-            log_message('error', 'Erro ao buscar PokéAPI: ' . $e->getMessage());
-            return [];
-        }
+        } catch (\Throwable $e) {
+    dd(
+        $e->getMessage(),
+        $e->getFile(),
+        $e->getLine()
+    );
+}
 
         return [];
     }

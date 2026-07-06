@@ -19,11 +19,39 @@ $routes->match(['get', 'post'], 'reset-senha/(:any)', 'UserController::resetPass
 
 // Área Restrita
 $routes->group('', ['filter' => 'auth'], function ($routes) {
-    // Rota principal apontando para o TeamController
+
+    // Dashboard
     $routes->get('dashboard', 'TeamController::index');
+
     $routes->get('perfil', 'UserController::perfil');
+
     $routes->get('meu-time', 'TeamController::meuTime');
-    
-    // Rota de PDF
-    $routes->get('teams/pdf/(:num)', 'PdfController::export/$1');
+
+    /*
+    |--------------------------------------------------------------------------
+    | CRUD DAS EQUIPES
+    |--------------------------------------------------------------------------
+    */
+
+    $routes->get('teams/(:num)', 'TeamController::buscar/$1');
+
+    $routes->post('teams', 'TeamController::salvar');
+
+    $routes->post('teams/editar/(:num)', 'TeamController::atualizar/$1');
+
+    $routes->get('teams/excluir/(:num)', 'TeamController::excluir/$1');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | PDF
+    |--------------------------------------------------------------------------
+    */
+
+    $routes->get(
+    'team/pdf/(:num)',
+    'TeamController::exportarPDF/$1',
+    ['filter' => 'auth']
+);
+
 });
