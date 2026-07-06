@@ -21,6 +21,8 @@ $routes->match(['get', 'post'], 'reset-senha/(:any)', 'UserController::resetPass
 $routes->group('', ['filter' => 'auth'], function ($routes) {
     // Rota principal apontando para o TeamController
     $routes->get('dashboard', 'TeamController::index');
+    $routes->get('perfil', 'UserController::perfil');
+    $routes->get('meu-time', 'TeamController::meuTime');
     
     // Rota de PDF
     $routes->get('teams/pdf/(:num)', 'PdfController::export/$1');

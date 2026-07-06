@@ -23,4 +23,21 @@ class TeamController extends BaseController
         // Carrega a view da dashboard
         return view('teams/index', $data);
     }
+
+
+
+
+    
+
+    public function meuTime()
+    {
+        if (!session()->get('logado')) {
+            return redirect()->to('/login');
+        }
+
+        return view('teams/index');
+    }
 }
+
+
+

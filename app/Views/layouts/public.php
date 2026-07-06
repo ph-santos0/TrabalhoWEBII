@@ -96,23 +96,52 @@
 
             <ul class="navbar-nav align-items-center">
 
-                <li class="nav-item">
-                    <a class="nav-link active me-3" href="<?= base_url() ?>">
-                        <i class="fa fa-house me-1"></i> Início
-                    </a>
-                </li>
+                <?php if (session()->get('logado')): ?>
 
-                <li class="nav-item">
-                    <a class="btn btn-outline-light btn-sm px-4 me-2" href="<?= base_url('login') ?>">
-                        Entrar
-                    </a>
-                </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle d-flex align-items-center"
+           href="#"
+           id="userDropdown"
+           role="button"
+           data-bs-toggle="dropdown"
+           aria-expanded="false">
 
-                <li class="nav-item">
-                    <a class="btn btn-danger btn-sm px-4" href="<?= base_url('register') ?>">
-                        Cadastrar
-                    </a>
-                </li>
+            <i class="fa-solid fa-circle-user fa-xl me-2"></i>
+            <?= esc(session()->get('nome')) ?>
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+                <a class="dropdown-item" href="<?= base_url('perfil') ?>">
+                    <i class="fa fa-user me-2"></i>Perfil
+                </a>
+            </li>
+
+            <li><hr class="dropdown-divider"></li>
+
+            <li>
+                <a class="dropdown-item text-danger" href="<?= base_url('logout') ?>">
+                    <i class="fa fa-right-from-bracket me-2"></i>Sair
+                </a>
+            </li>
+        </ul>
+    </li>
+
+<?php else: ?>
+
+    <li class="nav-item">
+        <a class="btn btn-outline-light btn-sm px-4 me-2" href="<?= base_url('login') ?>">
+            Entrar
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="btn btn-danger btn-sm px-4" href="<?= base_url('register') ?>">
+            Cadastrar
+        </a>
+    </li>
+
+<?php endif; ?>
 
             </ul>
 
