@@ -6,3 +6,5 @@
 
 /writable/session/*
 !/writable/session/.gitkeep
+
+/vendor
