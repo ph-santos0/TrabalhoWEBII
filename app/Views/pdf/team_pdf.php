@@ -1,88 +1,68 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="pt-BR">
 <head>
-
     <meta charset="UTF-8">
-
+    <title>Equipe - <?= esc($team['nome']) ?></title>
     <style>
-
-        body{
-            font-family: DejaVu Sans;
-            margin:40px;
+        body {
+            font-family: Arial, sans-serif;
+            color: #0b1f3a;
         }
-
-        h1{
-            text-align:center;
+        .cabecalho {
+            text-align: center;
+            border-bottom: 3px solid #365bf0;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
         }
-
-        table{
-
-            width:100%;
-            border-collapse:collapse;
-
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
-
-        td,th{
-
-            border:1px solid #000;
-            padding:8px;
-
+        th, td {
+            border: 1px solid #b8c7db;
+            padding: 12px;
+            text-align: left;
         }
-
-        th{
-
-            background:#eeeeee;
-
+        th {
+            background-color: #eaf4ff;
+            color: #143a66;
         }
-
+        .rodape {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #8fa3bf;
+        }
     </style>
-
 </head>
-
 <body>
 
-<h1><?= esc($team['nome']) ?></h1>
+    <div class="cabecalho">
+        <h1>Unova Team Builder</h1>
+        <h2>Relatório de Equipe: <?= esc($team['nome']) ?></h2>
+    </div>
 
-<table>
+    <table>
+        <thead>
+            <tr>
+                <th>Slot</th>
+                <th>Pokémon</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php for ($i = 1; $i <= 6; $i++): ?>
+                <tr>
+                    <td>Pokémon <?= $i ?></td>
+                    <td><?= !empty($team['pokemon' . $i]) ? esc($team['pokemon' . $i]) : '<em>Vazio</em>' ?></td>
+                </tr>
+            <?php endfor; ?>
+        </tbody>
+    </table>
 
-<tr>
-<th>Slot</th>
-<th>Pokémon</th>
-</tr>
-
-<tr>
-<td>1</td>
-<td><?= esc($team['pokemon1']) ?></td>
-</tr>
-
-<tr>
-<td>2</td>
-<td><?= esc($team['pokemon2']) ?></td>
-</tr>
-
-<tr>
-<td>3</td>
-<td><?= esc($team['pokemon3']) ?></td>
-</tr>
-
-<tr>
-<td>4</td>
-<td><?= esc($team['pokemon4']) ?></td>
-</tr>
-
-<tr>
-<td>5</td>
-<td><?= esc($team['pokemon5']) ?></td>
-</tr>
-
-<tr>
-<td>6</td>
-<td><?= esc($team['pokemon6']) ?></td>
-</tr>
-
-</table>
+    <div class="rodape">
+        <p>Documento gerado em <?= date('d/m/Y \à\s H:i') ?></p>
+    </div>
 
 </body>
-
 </html>

@@ -170,9 +170,9 @@ body::before{
     <i class="fa-solid fa-pen"></i>
 </a>
 
-<button class="icon-btn ms-1">
+<a href="<?= site_url('teams/exportar/' . $redTeam['id']) ?>" class="icon-btn ms-1 text-decoration-none text-white" target="_blank" title="Exportar PDF">
     <i class="fa-solid fa-file-pdf"></i>
-</button>
+</a>
         </div>
 
     </div>
@@ -238,9 +238,9 @@ body::before{
     <i class="fa-solid fa-pen"></i>
 </a>
 
-<button class="icon-btn ms-1">
+<a href="<?= site_url('teams/exportar/' . $blueTeam['id']) ?>" class="icon-btn ms-1 text-decoration-none text-white" target="_blank" title="Exportar PDF">
     <i class="fa-solid fa-file-pdf"></i>
-</button>
+</a>
         </div>
 
     </div>
@@ -307,9 +307,9 @@ body::before{
     <i class="fa-solid fa-pen"></i>
 </a>
 
-<button class="icon-btn ms-1">
+<a href="<?= site_url('teams/exportar/' . $greenTeam['id']) ?>" class="icon-btn ms-1 text-decoration-none text-white" target="_blank" title="Exportar PDF">
     <i class="fa-solid fa-file-pdf"></i>
-</button>
+</a>
 
         </div>
 

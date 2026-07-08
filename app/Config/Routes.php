@@ -61,5 +61,5 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
 $routes->get('teams/edit/(:num)', 'TeamController::edit/$1');
 $routes->post('teams/update/(:num)', 'TeamController::update/$1');
 $routes->get('meu-time', 'TeamController::meuTime');
-
+$routes->get('teams/exportar/(:num)', 'TeamController::exportarPDF/$1');
 });
